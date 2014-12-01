@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="MailHost" meta_type="Mail Host" smtp_host="cmf2.it.uwosh.edu"
+   smtp_port="8025" smtp_pwd="" smtp_queue="False" smtp_queue_directory="/tmp"
+   smtp_uid=""/>

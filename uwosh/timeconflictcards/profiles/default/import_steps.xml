@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step 
+    id="uwosh.timeconflictcards-Install-Vocabularies" 
+    handler="uwosh.timeconflictcards.setuphandlers.installVocabularies"
+    title="Install Vocabularies for uwosh.timeconflictcards"
+    version="2008-10-21T13:22:32.598710">
+   <dependency step="uwosh.timeconflictcards-QI-dependencies"/>
+   Installs the vocabulary files into vocabulary library for uwosh.timeconflictcards
+ </import-step>
+
+ <import-step 
+    id="uwosh.timeconflictcards-create-registrar-group" 
+    handler="uwosh.timeconflictcards.setuphandlers.createRegistrarGroup"
+    title="Create Registrar group for uwosh.timeconflictcards"
+    version="2012-02-14">
+   <dependency step="uwosh.timeconflictcards-QI-dependencies"/>
+   Creates the Registrar group for uwosh.timeconflictcards
+ </import-step>
+
+ <import-step 
+    id="uwosh.timeconflictcards-install" 
+    handler="uwosh.timeconflictcards.setuphandlers.install"
+    title="install uwosh.timeconflictcards"
+    version="2012-03-02">
+   <dependency step="uwosh.timeconflictcards-QI-dependencies"/>
+   install uwosh.timeconflictcards
+ </import-step>
+
+</import-steps>
+ 

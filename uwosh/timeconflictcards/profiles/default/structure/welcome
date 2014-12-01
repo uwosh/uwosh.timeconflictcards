@@ -1,0 +1,131 @@
+id: welcome
+title: Time Conflict Cards
+description: 
+subject: 
+relatedItems: 
+location: 
+language: en
+effectiveDate: 2012/02/15 11:45:00 US/Central
+expirationDate: None
+creation_date: 2012/02/15 11:43:3.813993 US/Central
+modification_date: 2012/03/02 09:48:22.629537 US/Central
+creators: kimadmin
+contributors: 
+rights: 
+allowDiscussion: False
+excludeFromNav: False
+presentation: False
+tableContents: False
+Content-Type: text/html
+
+<table class="plain" summary="What would you like to do?">
+<tbody>
+<tr>
+<th>Students</th><th>Instructors</th><th>Registrar's Office</th>
+</tr>
+<tr>
+<td>
+<ul>
+<li><a href="createTimeConflictCard">fill out a new time conflict card</a> </li>
+</ul>
+<p> </p>
+<ul>
+<li><a class="internal-link" href="dashboard">view your dashboard</a></li>
+</ul>
+<p> </p>
+<ul>
+<li>view these individual reports:</li>
+</ul>
+<p> </p>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/student-my-time-conflict-cards-needing-a-response">REQUIRING A RESPONSE to an instructor</a> </li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/student-my-cards-waiting-for-approval">awaiting approval by an instructor</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/student-my-time-conflict-cards-awaiting-registrar-processing">awaiting processing by the Registrar</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/reports/student-my-time-conflict-cards-completed">approved and processed</a></li>
+</ul>
+</ul>
+<p> </p>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/reports/student-my-time-conflict-cards-denied">requests that have been denied</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/reports/student-my-time-conflict-cards-archived">cards that have been archived (old requests)</a></li>
+</ul>
+</ul>
+<p> </p>
+<ul>
+</ul>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-students/student-my-time-conflict-cards">all your time conflict card(s)</a></li>
+</ul>
+</ul>
+</td>
+<td>
+<ul>
+<li><a class="internal-link" href="dashboard">view your dashboard</a></li>
+</ul>
+<p> </p>
+<ul>
+<li>view these individual reports:</li>
+</ul>
+<p> </p>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-instructors/instructors-time-conflict-cards-awaiting-my-approval-as-instructor1">cards you must review (as instructor 1)</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-instructors/instructors-time-conflict-cards-awaiting-my-approval-as-instructor2">cards you must review (as instructor 2)</a></li>
+</ul>
+</ul>
+<p> </p>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-instructors/instructors-time-conflict-cards-i-have-approved-as-instructor1">cards you have approved (as instructor 1)</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-instructors/instructors-time-conflict-cards-i-have-approved-as-instructor2">cards you have approved (as instructor 2)</a></li>
+</ul>
+</ul>
+</td>
+<td>
+<ul>
+<li><a class="internal-link" href="dashboard">view your dashboard</a></li>
+</ul>
+<p> </p>
+<ul>
+<li>view these individual reports:</li>
+</ul>
+<p> </p>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-registrar/registrar-time-conflict-cards-awaiting-processing">cards you must process</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-registrar/registrar-time-conflict-cards-to-archive">cards you can archive</a></li>
+</ul>
+</ul>
+<p> </p>
+<ul>
+<ul>
+<li><a class="internal-link" href="reports/for-registrar/registrar-time-conflict-cards-late-needinstructorapproval">cards that are late (waiting for instructor)</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-registrar/registrar-time-conflict-cards-late-instructorwaitingforstudentresponse">cards that are late (waiting for student to respond)</a></li>
+</ul>
+<ul>
+<li><a class="internal-link" href="reports/for-registrar/registrar-time-conflict-cards-late-registrarprocessing">cards that are late (waiting to be processed)</a></li>
+</ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>

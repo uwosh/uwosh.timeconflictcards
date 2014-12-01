@@ -1,0 +1,306 @@
+#!/usr/bin/env <html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+  <body>
+
+    <div metal:fill-slot="main" 
+      tal:define="here_url here/absolute_url;
+              wf_tool context/portal_workflow;
+              review_state python:wf_tool.getInfoFor(context, 'review_state', '');
+              pm context/portal_membership;
+              memberId python:pm.getAuthenticatedMember().id;
+              pr nocall:here/portal_repository|nothing;
+              isVersionable python:pr is not None and pr.isVersionable(context) or None;
+              supportsAutoVersion python:pr is not None and pr.supportsPolicy(context, 'at_edit_autoversion') or None">
+               
+      <div id="viewlet-above-content-title"></div>                           
+      <div id="UWOshOIEApplicationState">
+        <fieldset>
+          <legend>Request State</legend>
+            <p tal:condition="review_state">
+              <span tal:attributes="class string:state-${review_state}" size=+2>Your request state is: <span tal:content="python: wf_tool.timeconflictcard.states[review_state].title"/></span>
+            </p>
+            <p>
+              <span tal:replace="python: wf_tool.timeconflictcard.states[review_state].description">  [state description] </span>
+            </p>
+            <p>
+              <a href="application-states-and-workflow">See process overview</a>
+            </p>
+        <tal:block>
+          <div id="UWOshOIEFunkyButtons">
+            <ul>
+              <li>
+                <a tal:condition="context/@@plone_context_state/is_editable" 
+         tal:attributes="href python:context.absolute_url() + '/base_edit?last_referer=' + context.absolute_url()">
+                    Edit request
+                </a>
+              </li>
+              <tal:block repeat="action python: wf_tool.listActions(object=context)"
+                tal:define="url_for_action string:$here_url/content_status_modify">  
+                <li tal:define="transition action;
+                  action_title python: transition['name'];
+                  action_id python: transition['id'];
+                  action_description python: transition['transition'].description"
+                  tal:condition="python: action_id != 'addcomment'">
+                    <a tal:attributes="href python:url_for_action + '?workflow_action=' + action_id"
+                     tal:content="action_title">
+                        [transition title and description]
+                    </a>
+                </li>
+              </tal:block>
+            </ul>
+          </div>
+          </tal:block>
+      </fieldset>
+  </div>
+
+
+<div id="UWOshOIEBasicInfo">
+    <fieldset>
+      <legend>Basic Information</legend>
+
+<!--
+       <h1 id="parent-fieldname-title" class="documentFirstHeading" tal:content="context/title_or_id">[title]                </h1>
+-->
+
+<!--         <div id="viewlet-below-content-title">
+          <div class="documentByLine" id="plone-document-byline">
+    
+           <span class="documentAuthor" 
+                  tal:define="mtool python:context.portal_membership;
+                                author python:(len(request.traverse_subpath) > 0 and url_unquote_plus(request.traverse_subpath[0])) or request.get('author', None);
+                                authorinfo python: mtool.getMemberInfo(author);
+                                member context/@@plone_portal_state/member;
+                                url_quote_plus python:modules['Products.PythonScripts.standard'].url_quote_plus;
+                                memberurl python:url_quote_plus(member.getId())
+                                    ">
+            by   <a tal:attributes="href string:${portal_url}/author/${memberurl}">[authorXXX]</a>      
+            —
+           </span>
+    
+           <span class="documentModified">
+            <span>
+              last modified XXX
+            </span>
+              [last modified XXX]  
+           </span>
+
+         </div>
+        </div>
+ -->
+
+
+<div id="content-core">                                             
+  <div class="field ArchetypesField-StringField" id="archetypes-fieldname-studentemail">
+      <label class="formQuestion"><span>Student's email address</span>:</label>     
+      <br />     
+        <span class=" kssattr-atfieldname-studentemail kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-studentemail" tal:content="here/getStudentemail">
+        [email]       
+        </span>   
+  </div>
+            
+  <div class="field ArchetypesField-StringField" id="archetypes-fieldname-fullname">           
+      <label class="formQuestion"><span>Student's full name</span>:</label>      
+      <br />     
+        <span class=" kssattr-atfieldname-fullname kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-fullname" tal:content="here/getFullname">
+            [full name]
+        </span>   
+  </div>           
+  <div class="field ArchetypesField-StringField" id="archetypes-fieldname-studentid">           
+      <label class="formQuestion"><span>Student ID#</span>:</label>      
+      <br />    
+        <span class=" kssattr-atfieldname-studentid kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-studentid" tal:content="here/getStudentemplid">
+            [studentid]
+        </span>    
+  </div>
+            
+
+  <div class="field ArchetypesField-StringField" id="archetypes-fieldname-psterm">        
+      <label class="formQuestion"><span>Academic term</span>:</label>
+      
+      <br />
+        
+        <span class=" kssattr-atfieldname-psterm kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-psterm" tal:content="here/getPsterm">
+            [psterm]
+        </span>   
+  </div>
+
+    <div class="field ArchetypesField-StringField" id="archetypes-fieldname-comments">
+           
+      <label class="formQuestion"><span>Explanation</span>:</label>
+      
+      <br />
+     
+        <span class=" kssattr-atfieldname-comments kssattr-templateId-widgets/textarea kssattr-macro-textarea-field-view" id="parent-fieldname-comments" tal:content="here/getComments">
+            [comments]
+        </span>
+
+    </div>
+
+
+    </fieldset>  
+
+</div> 
+
+<div id="UWOshOIEComments">
+      <fieldset>
+        <legend>Comments and History</legend>
+        <div class="contentHistory"  id="content-history"       i18n:domain="plone">
+          <dl id="history" class="collapsible collapsedOnLoad">
+            <dt class="collapsibleHeader" i18n:translate="label_history">View or Add Comments</dt>
+            <dd class="collapsibleContent">
+                <div tal:replace ="structure here/@@contenthistory" />
+            </dd>
+            <span class="AddComments">
+              <form tal:attributes="action string:$here_url/content_status_modify" method="GET">
+                  <dd class="collapsibleContent">
+                        <textarea   id="comment"
+                                    name="comment"
+                                    cols="60"
+                                    rows="3"
+                                    tal:content="request/comment|nothing">
+                        </textarea>  
+                      <input class="context"
+                             type="submit"
+                             name="form.button.Publish"
+                             value="Add Comment"
+                             />
+                        <input type="hidden" name="workflow_action" value="addcomment" />
+              </form>     
+            </span>
+          </dl>
+        </div>
+                <dl id="history" class="collapsible collapsedOnLoad">
+                </dl>
+    </fieldset>
+</div>
+
+  
+
+<div id="UWOshOIEFirstClass">
+      <fieldset>
+      <legend>First Conflicting Class</legend> 
+       <p>Instructor/Department signature approves consent, class limit, and requisites unless otherwise noted in comments</p>           
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-subject1">           
+      <label class="formQuestion"><span>Subject 1</span>:</label>
+      
+      <br />      
+        <span class=" kssattr-atfieldname-subject1 kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-subject1" tal:content="here/getSubject1">
+            [subject1]
+        </span> 
+    </div>           
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-coursenumber1">          
+      <label class="formQuestion"><span>Catalog Number 1</span>:</label>
+      
+      <br />      
+        <span class=" kssattr-atfieldname-coursenumber1 kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-coursenumber1" tal:content="here/getCatalognumber1">
+            [coursenumber1]
+        </span>  
+    </div>          
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-sectionnumber1">           
+      <label class="formQuestion"><span>Section Number 1</span>:</label>
+      
+      <br />    
+        <span class=" kssattr-atfieldname-sectionnumber1 kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-sectionnumber1" tal:content="here/getSectionnumber1">
+            [sectionnumber1]
+        </span>   
+    </div>          
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-classnumber1">           
+      <label class="formQuestion"><span>Class Number 1</span>:</label>
+      
+      <br />    
+        <span class=" kssattr-atfieldname-classnumber1 kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-classnumber1" tal:content="here/getClassnumber1">
+            [classnumber1]
+        </span> 
+    </div>          
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-instructorID1">          
+      <label class="formQuestion"><span>Instructor 1's ID</span>:</label>
+      
+      <br />  
+        <span class=" kssattr-atfieldname-instructorID1 kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-instructorID1">
+            <a tal:content="here/getInstructorID1"
+              tal:define="instructorMember python:context.getInstructorID1().strip() <> '' and context.portal_membership.getMemberById(context.getInstructorID1())"
+              tal:attributes="href python:'mailto:' + (instructorMember and instructorMember.getProperty('email', '') or '') + '?subject=time conflict card request at ' + context.absolute_url() "> [instructorID1] </a>
+        </span>  
+    </div>          
+</fieldset>
+</div>
+
+<div id="UWOshOIESecondClass">
+      <fieldset>
+      <legend>Second Conflicting Class</legend>
+        <p>Instructor/Department signature approves consent, class limit, and requisites unless otherwise noted in comments</p>    
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-subject2">          
+      <label class="formQuestion"><span>Subject 2</span>:</label>
+      
+      <br />     
+        <span class=" kssattr-atfieldname-subject2 kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-subject2" tal:content="here/getSubject2">
+            [subject2]
+        </span> 
+    </div>         
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-coursenumber2">        
+            
+      <label class="formQuestion"><span>Catalog Number 2</span>:</label>
+      
+      <br />    
+        <span class=" kssattr-atfieldname-coursenumber2 kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-coursenumber2" tal:content="here/getCatalognumber2">
+            [coursenumber2]
+        </span>  
+    </div>         
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-sectionnumber2">           
+      <label class="formQuestion"><span>Section Number 2</span>:</label>
+      
+      <br />
+    
+          
+          
+      
+        <span class=" kssattr-atfieldname-sectionnumber2 kssattr-templateId-widgets/selection kssattr-macro-selection-field-view" id="parent-fieldname-sectionnumber2" tal:content="here/getSectionnumber2">
+            [sectionnumber2]
+        </span>
+  
+    </div>
+           
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-classnumber2">
+         
+            
+      <label class="formQuestion"><span>Class Number 2</span>:</label>
+      
+      <br />
+      
+        <span class=" kssattr-atfieldname-classnumber2 kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-classnumber2" tal:content="here/getClassnumber2">
+            [classnumber2]
+        </span>
+    
+    </div>
+          
+              <div class="field ArchetypesField-StringField" id="archetypes-fieldname-instructorID2">
+          
+      
+        
+          
+            
+      <label class="formQuestion"><span>Instructor 2's ID</span>:</label>
+      
+      <br />
+    
+          
+          
+      
+        <span class=" kssattr-atfieldname-instructorID2 kssattr-templateId-widgets/string kssattr-macro-string-field-view" id="parent-fieldname-instructorID2">
+            <a tal:content="here/getInstructorID2"
+              tal:define="instructorMember python:context.getInstructorID2().strip() <> '' and context.portal_membership.getMemberById(context.getInstructorID2())"
+              tal:attributes="href python:'mailto:' + (instructorMember and instructorMember.getProperty('email', '') or '') + '?subject=time conflict card request at ' + context.absolute_url() "> [instructorID2] </a>
+        </span>
+    
+    </div>
+            
+          
+</fieldset>          
+
+</div>
+
+
+</div>
+                           
+</body>
+</html>

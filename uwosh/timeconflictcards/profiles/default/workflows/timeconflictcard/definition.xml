@@ -1,0 +1,485 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="timeconflictcard" title="timeconflictcard" description=" - Simple workflow that is useful for basic web sites. - Things start out as private, and can either be submitted for review, or published directly. - The creator of a content item can edit the item even after it is published." state_variable="review_state" initial_state="private" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Add portal content</permission>
+ <permission>Change portal events</permission>
+ <permission>List folder contents</permission>
+ <permission>Modify portal content</permission>
+ <permission>Review portal content</permission>
+ <permission>View</permission>
+ <state state_id="archived" title="Archived">
+  <exit-transition transition_id="addcomment"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="completed" title="Completed">
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="archive"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="instructor1waitingforstudentresponse" title="Instructor 1 waiting for student to respond to question">
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="studentrespondstoinstructor1request"/>
+  <exit-transition transition_id="retract"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="instructor2waitingforstudentresponse" title="Instructor 2 waiting for student to respond to question">
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="studentrespondstoinstructor2request"/>
+  <exit-transition transition_id="retract"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="needinstructor1approval" title="Needs instructor 1 approval">
+  <exit-transition transition_id="instructor1deniesenrollment"/>
+  <exit-transition transition_id="submitforinstructor2approval"/>
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="instructor1requestsmoreinformation"/>
+  <exit-transition transition_id="retract"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="needinstructor2approval" title="Needs instructor 2 approval">
+  <exit-transition transition_id="instructor2requestsmoreinformation"/>
+  <exit-transition transition_id="instructor2deniesenrollment"/>
+  <exit-transition transition_id="submittoregistrarforprocessing"/>
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="retract"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="private" title="Private / not yet submitted">
+  <description>This request can currently only be seen by you.  Edit the card to select the classes that conflict and please provide more information about the conflict.  You must submit this card when you are done filling it out, so that the instructors can review it.</description>
+  <exit-transition transition_id="submitforinstructor1approval"/>
+  <exit-transition transition_id="addcomment"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="registrarprocessing" title="Waiting for Registrar to process">
+  <description>The request is waiting to be processed by the Registrar's Office</description>
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="registrarsofficecompletesprocessing"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="retracted" title="Retracted">
+  <exit-transition transition_id="addcomment"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="studenthasbeeninformedenrollmentdenied" title="The request has been denied">
+  <description>The student has been informed that the request has been denied</description>
+  <exit-transition transition_id="addcomment"/>
+  <exit-transition transition_id="retract"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Instructor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Registrar</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="addcomment" title="Add a comment" new_state="" trigger="USER" before_script="" after_script="">
+  <description>Add a comment to the request</description>
+  <action url="" category="workflow" icon="">Add a comment</action>
+  <guard>
+   <guard-role>Authenticated</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="archive" title="Archive this request" new_state="archived" trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=archive" category="workflow" icon="">archive</action>
+  <guard>
+   <guard-role>Registrar</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="instructor1deniesenrollment" title="Deny request" new_state="studenthasbeeninformedenrollmentdenied" trigger="USER" before_script="" after_script="">
+  <description>Instructor 1 denies the request</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=instructor1deniesenrollment" category="workflow" icon="">Deny Enrollment</action>
+  <guard>
+   <guard-expression>python:state_change.getPortal().portal_membership.getAuthenticatedMember().getId() == here.getInstructorID1()</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="instructor1requestsmoreinformation" title="Request more information from student" new_state="instructor1waitingforstudentresponse" trigger="USER" before_script="" after_script="">
+  <description>Instructor 1 requests more information from the student</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=instructor1requestsmoreinformation" category="workflow" icon="">Request more information from student</action>
+  <guard>
+   <guard-expression>python:state_change.getPortal().portal_membership.getAuthenticatedMember().getId() == here.getInstructorID1()</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="instructor2deniesenrollment" title="Deny request" new_state="studenthasbeeninformedenrollmentdenied" trigger="USER" before_script="" after_script="">
+  <description>Instructor 2 denies the request</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=instructor2deniesenrollment" category="workflow" icon="">Deny Enrollment</action>
+  <guard>
+   <guard-expression>python:state_change.getPortal().portal_membership.getAuthenticatedMember().getId() == here.getInstructorID2()</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="instructor2requestsmoreinformation" title="Request more information from student" new_state="instructor2waitingforstudentresponse" trigger="USER" before_script="" after_script="">
+  <description>Instructor 2 requests more information from the student</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=instructor2requestsmoreinformation" category="workflow" icon="">Request more information from student</action>
+  <guard>
+   <guard-expression>python:state_change.getPortal().portal_membership.getAuthenticatedMember().getId() == here.getInstructorID2()</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="registrarsofficecompletesprocessing" title="Complete processing" new_state="completed" trigger="USER" before_script="" after_script="">
+  <description>Registrar's Office has completed processing the request and has enrolled the student</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=registrarsofficecompletesprocessing" category="workflow" icon="">Complete Processing</action>
+  <guard>
+   <guard-role>Registrar</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="retract" title="Retract this request" new_state="retracted" trigger="USER" before_script="" after_script="">
+  <description>The student retracts the request</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=retract" category="workflow" icon="">Retract this card</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="studentrespondstoinstructor1request" title="Respond to instructor request for more information" new_state="needinstructor1approval" trigger="USER" before_script="" after_script="">
+  <description>The student responds to Instructor 1's request for more information</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=studentrespondstoinstructor1request" category="workflow" icon="">Instructor is requesting more student information.</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="studentrespondstoinstructor2request" title="Respond to instructor request for more information" new_state="needinstructor2approval" trigger="USER" before_script="" after_script="">
+  <description>The student responds to Instructor 2's request for more information</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=studentrespondstoinstructor2request" category="workflow" icon="">Submit comment response to instructor request for more information</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="submitforinstructor1approval" title="Submit for approval" new_state="needinstructor1approval" trigger="USER" before_script="" after_script="">
+  <description>The student submits the request to Instructor 1 for review</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submitforinstructor1approval" category="workflow" icon="">Submit for Instructor Approval</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+   <guard-role>Site Administrator</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Registrar</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="submitforinstructor2approval" title="Approve and send to other instructor for approval" new_state="needinstructor2approval" trigger="USER" before_script="" after_script="">
+  <description>Instructor 1 approves and sends on to Instructor 2 for review</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submitforinstructor2approval" category="workflow" icon="">Submit for Next Instructor Approval</action>
+  <guard>
+   <guard-expression>python:state_change.getPortal().portal_membership.getAuthenticatedMember().getId() == here.getInstructorID1()</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="submittoregistrarforprocessing" title="Approve and send to registrar" new_state="registrarprocessing" trigger="USER" before_script="" after_script="">
+  <description>Instructor 2 approves the request and sends it on to be processed by the Registrar's Office</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submittoregistrarforprocessing" category="workflow" icon="">Approve request and Submit to Registrar for Processing</action>
+  <guard>
+   <guard-expression>python:state_change.getPortal().portal_membership.getAuthenticatedMember().getId() == here.getInstructorID2()</guard-expression>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the previous transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comment about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="grabProfessorData" type="Script (Python)" filename="workflows/timeconflictcard/scripts/grabProfessorData.py" module="" function=""/>
+ <script script_id="send_info_to_instructor" type="Controller Python Script" filename="" module="" function=""/>
+</dc-workflow>

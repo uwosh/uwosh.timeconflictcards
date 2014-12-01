@@ -1,0 +1,49 @@
+id: application-states-and-workflow
+title: Process Overview
+description: An overview of the steps in this process
+subject: 
+relatedItems: 
+location: 
+language: en
+effectiveDate: 2012/02/13 23:15:00 US/Central
+expirationDate: None
+creation_date: 2012/02/13 23:14:11.868455 US/Central
+modification_date: 2012/02/23 11:41:18.857231 US/Central
+creators: admin
+contributors: 
+rights: 
+allowDiscussion: False
+excludeFromNav: False
+presentation: False
+tableContents: False
+Content-Type: text/html
+
+<p>The overall steps in this process are:</p>
+<ul>
+<li>Student fills out a request</li>
+<li>Student submits the request</li>
+<li>Instructor #1 reviews the request, and can:</li>
+<ul>
+<li>deny it (don't forget to put a reason for the denial in the comments dropdown)</li>
+<li>approve it (sending it on to Instructor #2)</li>
+<li>add a comment then request a response from the student (in which case the student must add a comment then mark that he/she has responded)</li>
+</ul>
+<li>Instructor #2 reviews the request, and can:</li>
+</ul>
+<ul>
+<ul>
+<li>deny it (don't forget to put a reason for the denial in the comments dropdown)</li>
+<li>approve it (sending it on to the Registrar's Office)</li>
+<li>add a comment then request a response from the student (in which case the student must add a comment then mark that he/she has responded) </li>
+</ul>
+<li>The Registrar's Office will then:</li>
+<ul>
+<li>Enroll the student if the request has been approved by both instructors</li>
+<li>Mark the request as 'completed'</li>
+<li>Eventually archive the request</li>
+</ul>
+</ul>
+<p> </p>
+<p>Below is a diagram of the workflow states and transitions.</p>
+<p><img class="image-inline" src="uwoshtimeconflictcardsworkflowmanager-view-graph.gif" /></p>
+<p> </p>

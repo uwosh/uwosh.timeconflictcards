@@ -1,0 +1,97 @@
+#UWOshOIEBasicInfo {
+width:45%;
+
+} 
+
+#UWOshOIEApplicationState {
+background-color:#f1f1f1;
+width:45%;
+position:absolute;
+right:0px;
+
+}
+
+#UWOshOIEComments fieldset{
+
+margin:0px;
+
+}
+
+#UWOshOIEFirstClass {
+position:absolute;
+width:50%;
+padding:0px!important;
+margin:0px!important;
+
+  
+} 
+
+#UWOshOIESecondClass {
+margin:0px!important;
+padding:0px!important;
+float:right;
+width:45%;
+    
+} 
+
+#UWOshOIECollapsibleSections {
+
+}
+
+
+
+#UWOshOIEFunkyButtons ul
+{
+    
+
+}
+
+#UWOshOIEFunkyButtons a
+{
+    
+    width:10em;
+    text-decoration:none;
+    color:white !important;
+    background-color:purple;
+    padding:0.2em 0.6em;
+    border-right:1px solid white;
+    font-size:x-small;
+}
+
+#UWOshOIEFunkyButtons a:hover 
+{
+    background-color:#ff3300;
+}
+
+#UWOshOIEFunkyButtons li 
+{
+    display:inline;
+}
+
+#UWOshOIExpandCollapseAll input
+{
+    font-size:x-small;
+}
+
+
+#UWOshOIEFunkyButtons input
+{
+    width:12em;
+    text-decoration:none;
+    color:white;
+    background:purple;
+    padding:0.2em 0.6em;
+    border-right:1px solid white;
+    font-size:x-small;
+    margin:0.2em 0 0.2em 0;
+}
+
+#UWOshOIEFunkyButtons input:hover 
+{
+    background-color:#ff3300;
+}
+
+#portal-column-content {
+    background-color:white;
+}
+

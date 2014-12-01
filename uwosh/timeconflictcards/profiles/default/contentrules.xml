@@ -1,0 +1,1103 @@
+<?xml version="1.0"?>
+<contentrules>
+ <rule name="--workflowmanager--timeconflictcard--archive"
+    title="archive transition content rule"
+    description="This content rule was automatically created by the workflow manager to create actions on workflow events. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>archive</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property name="message">
+You have archived this time conflict card:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{% for m in context.getRegistrarGroupMemberEmails() %} {{ m }}, {% endfor %}</property>
+    <property
+       name="subject">[REGISTRAR] you have archived this time conflict card for {{ context.getFullname() }} </property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--submitforinstructor1approval"
+    title="submitforinstructor1approval transition content rule"
+    description="This content rule was automatically created by the workflow manager to create actions on workflow events. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>submitforinstructor1approval</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+</conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Please click on the following link to review this time conflict card.  You may approve or deny the request.  You may also request add a comment then request a response from the student.
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between your class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and this other class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID1()) }}</property>
+    <property
+       name="subject">[REGISTRAR] your approval is needed for a time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Your time conflict request has been sent for review to {{context.getMemberEmail(context.getInstructorID1())}}
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property name="subject">[REGISTRAR] you submitted a time conflict card</property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--submittoregistrarforprocessing"
+    title="submittoregistrarforprocessing transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>submittoregistrarforprocessing</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Your time conflict request has been approved by both instructors {{context.getMemberEmail(context.getInstructorID1())}} and {{context.getMemberEmail(context.getInstructorID2())}}, and is awaiting processing by the Registrar's Office.
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] your time conflict card has been approved by both instructors and awaits processing by the Registrar</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You approved this time conflict card, and it is now awaiting processing by the Registrar's Office:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between this class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and your class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID2()) }}</property>
+    <property
+       name="subject">[REGISTRAR] you approved a time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Please process this time conflict request.  It has been approved by both instructors {{context.getMemberEmail(context.getInstructorID1())}} and {{context.getMemberEmail(context.getInstructorID2())}}
+
+You may view the request here:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{% for m in context.getRegistrarGroupMemberEmails() %} {{ m }}, {% endfor %}</property>
+    <property
+       name="subject">[REGISTRAR] please process this time conflict card for {{ context.getFullname() }} </property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--submitforinstructor2approval"
+    title="submitforinstructor2approval transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>submitforinstructor2approval</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Please click on the following link to review this time conflict card.  You may approve or deny the request.  You may also request add a comment then request a response from the student.
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between your class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and this other class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID2()) }}</property>
+    <property
+       name="subject">[REGISTRAR] your approval is needed for this time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Your time conflict request has approved by {{context.getMemberEmail(context.getInstructorID1())}} and is awaiting review now by {{context.getMemberEmail(context.getInstructorID2())}}
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] your time conflict card has been approved by the first instructor</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You approved this time conflict card, and it is now awaiting review by {{context.getMemberEmail(context.getInstructorID2())}}:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between your class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and this other class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID1()) }}</property>
+    <property
+       name="subject">[REGISTRAR] you approved a time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="--workflowmanager--timeconflictcard--addcomment"
+    title="addcomment transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>addcomment</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"/>
+    <property
+       name="message">
+A comment has been added to a time conflict card for {{ context.getFullname() }}:
+
+Comment added was:
+
+{{ portal.portal_workflow.getInfoFor(context, 'review_history')[-1]['comments'] }}
+
+
+You may view the request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{% if portal.portal_workflow.getInfoFor(context, 'review_state') != 'private' %} {{ context.getMemberEmail(context.getInstructorID1()) }}, {% endif %} {% if portal.portal_workflow.getInfoFor(context, 'review_state') in ('needinstructor2approval', 'instructor2waitingforstudentresponse', 'studenthasbeeninformedenrollmentdenied', 'retracted', 'registrarprocessing', 'completed', 'archived') %} {{ context.getMemberEmail(context.getInstructorID2()) }}, {% endif %} {{ context.getStudentemail() }}, {% if portal.portal_workflow.getInfoFor(context, 'review_state') in ('registrarprocessing', 'completed', 'archived', 'retracted') %} {% for m in context.getRegistrarGroupMemberEmails() %} {{ m }}, {% endfor %} {% endif %}</property>
+    <property
+       name="subject">[REGISTRAR] a comment has been added to a time conflict card for {{ context.getFullname() }}</property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--registrarsofficecompletesprocessing"
+    title="registrarsofficecompletesprocessing transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>registrarsofficecompletesprocessing</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Your time conflict card has been processed by the Registrar's Office. Please check that you have been enrolled into the correct classes.
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] your time conflict card has been processed by the Registrar</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You have completed processing this time conflict request:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{% for m in context.getRegistrarGroupMemberEmails() %} {{ m }}, {% endfor %}</property>
+    <property
+       name="subject">[REGISTRAR] You have completed processing a time conflict card for {{ context.getFullname() }} </property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="--workflowmanager--timeconflictcard--instructor2deniesenrollment"
+    title="instructor2deniesenrollment transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>instructor2deniesenrollment</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Your time conflict card request has been denied by {{context.getMemberEmail(context.getInstructorID2())}}.
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] your time conflict request has been denied by {{context.getMemberEmail(context.getInstructorID2())}}</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property name="message">
+You denied this time conflict card request:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between this class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and your class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID2()) }}</property>
+    <property
+       name="subject">[REGISTRAR] you denied a time conflict card request for ({{ context.getFullname() }})</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="--workflowmanager--timeconflictcard--instructor1deniesenrollment"
+    title="instructor1deniesenrollment transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>instructor1deniesenrollment</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+Your time conflict card request has been denied by {{context.getMemberEmail(context.getInstructorID1())}}.
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] your time conflict request has been denied by {{context.getMemberEmail(context.getInstructorID1())}}</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property name="message">
+You denied this time conflict card request:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between your class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and this other class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID1()) }}</property>
+    <property
+       name="subject">[REGISTRAR] you denied a time conflict card request for ({{ context.getFullname() }})</property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--instructor1requestsmoreinformation"
+    title="instructor1requestsmoreinformation transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>instructor1requestsmoreinformation</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You have requested more information for this time conflict card, and it is now awaiting a response from  {{context.getMemberEmail(context.getStudentemail())}}:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between your class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and this other class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID1()) }}</property>
+    <property
+       name="subject">[REGISTRAR] you requested more information about a time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+More information about your time conflict card has been requested by {{context.getMemberEmail(context.getInstructorID1())}}.
+
+You must respond using the Add Comment action, then you must choose the Respond to Instructor Request button.
+
+
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] more information about your time conflict card has been requested by {{context.getMemberEmail(context.getInstructorID1())}}</property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--instructor2requestsmoreinformation"
+    title="instructor2requestsmoreinformation transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>instructor2requestsmoreinformation</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+More information about your time conflict card has been requested by {{context.getMemberEmail(context.getInstructorID2())}}.
+
+You must respond using the Add Comment action, then you must choose the Respond to Instructor Request button.
+
+
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] more information about your time conflict card has been requested by {{context.getMemberEmail(context.getInstructorID2())}}</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You have requested more information for this time conflict card, and it is now awaiting a response from  {{context.getMemberEmail(context.getStudentemail())}}:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between this class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and your class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID2()) }}</property>
+    <property
+       name="subject">[REGISTRAR] you requested more information about a time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--studentrespondstoinstructor1request"
+    title="studentrespondstoinstructor1request transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>studentrespondstoinstructor1request</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You responded to an information request about your time conflict card and it awaits review by {{context.getMemberEmail(context.getInstructorID1())}}
+
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] you responded to an information request about your time conflict card by {{context.getMemberEmail(context.getInstructorID1())}}</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+The student has responded to your request for information for this time conflict card, and it is now awaiting your review:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between your class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and this other class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID1())  }}</property>
+    <property
+       name="subject">[REGISTRAR] {{ context.getFullname() }} has responded to your request for more information about their time conflict card</property>
+   </action>
+  </actions>
+ </rule>
+ <rule
+    name="--workflowmanager--timeconflictcard--studentrespondstoinstructor2request"
+    title="studentrespondstoinstructor2request transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>studentrespondstoinstructor2request</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You responded to an information request about your time conflict card and it awaits review by {{context.getMemberEmail(context.getInstructorID2())}}
+
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] you responded to an information request about your time conflict card by {{context.getMemberEmail(context.getInstructorID2())}}</property>
+   </action>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+The student has responded to your request for information for this time conflict card, and it is now awaiting your review:
+
+{{ context.absolute_url() }}
+
+The student is {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+The conflict is for semester code: {{context.getPsterm()}}
+
+and is between this class:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and your class:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is the student's explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property
+       name="recipients">{{ context.getMemberEmail(context.getInstructorID2()) }}</property>
+    <property
+       name="subject">[REGISTRAR] the student has responded to your request for more information about a time conflict card for ({{ context.getFullname() }})</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="--workflowmanager--timeconflictcard--retract"
+    title="retract transition content rule"
+    description="This content rule was automatically created by the workflow manager to support actions on workflow transitions. If you want the behavior to work as expected, do not modify this outside the workflow manager."
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>retract</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>TimeConflictCard</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="collective.easytemplate.actions.Mail">
+    <property name="source"></property>
+    <property
+       name="message">
+You have retracted your time conflict card request.
+
+
+You may view your request at any time by clicking on the following link:
+
+{{ context.absolute_url() }}
+
+You may also edit and resubmit your request.
+
+-------------
+
+Request is for {{ context.getFullname() }} ({{context.getStudentemail()}})
+
+for semester code: {{context.getPsterm()}}
+
+and is between:
+
+{{context.getSubject1()}} {{context.getCatalognumber1()}} {{context.getSectionnumber1()}} (class number is {{context.getClassnumber1()}}, instructor is {{context.getMemberEmail(context.getInstructorID1())}})
+
+and:
+
+{{context.getSubject2()}} {{context.getCatalognumber2()}} {{context.getSectionnumber2()}} (class number is {{context.getClassnumber2()}}, instructor is {{context.getMemberEmail(context.getInstructorID2())}})
+
+Here is your explanation of the conflict:
+
+{{context.getComments()}}
+                    </property>
+    <property name="recipients">{{ context.getStudentemail() }}</property>
+    <property
+       name="subject">[REGISTRAR] you have retracted your time conflict card request </property>
+   </action>
+  </actions>
+ </rule>
+ <assignment
+    name="--workflowmanager--timeconflictcard--submitforinstructor1approval"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--submittoregistrarforprocessing"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--submitforinstructor2approval"
+    bubbles="True" enabled="True" location=""/>
+ <assignment name="--workflowmanager--timeconflictcard--addcomment"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--registrarsofficecompletesprocessing"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--instructor2deniesenrollment"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--instructor1deniesenrollment"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--instructor1requestsmoreinformation"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--instructor2requestsmoreinformation"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--studentrespondstoinstructor1request"
+    bubbles="True" enabled="True" location=""/>
+ <assignment
+    name="--workflowmanager--timeconflictcard--studentrespondstoinstructor2request"
+    bubbles="True" enabled="True" location=""/>
+ <assignment name="--workflowmanager--timeconflictcard--retract"
+    bubbles="True" enabled="True" location=""/>
+</contentrules>

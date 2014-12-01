@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="uwosh.timeconflictcards">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+<browser:page
+    name="timeconflictcard_view"
+    for="..interfaces.timeconflictcard.ITimeConflictCard"
+    permission="zope2.View"
+    class=".views.TimeConflictCardView"
+    />
+
+<browser:resource
+    name="timeconflictcard.js"
+    file="resources/timeconflictcard.js"
+    />
+
+<browser:resource
+    name="timeconflictcard.css"
+    file="resources/timeconflictcard.css"
+    />
+
+<browser:resource
+    name="timeconflictcardreload.js"
+    file="resources/timeconflictcardreload.js"
+    />
+
+</configure>

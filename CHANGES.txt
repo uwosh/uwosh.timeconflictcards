@@ -1,0 +1,28 @@
+Changelog
+=========
+
+0.3 (2011-12-06)
+----------------
+
+- Creates (recreates if they exist) vocabularies at install time [nguyen]
+
+- Custom timeconflictcard_view template includes "add comment" text field and
+  button; card state information at top of page (in progress) [nguyen]
+
+- Added dependency on collective.easytemplate for transition actions that send
+  templated emails [nguyen]
+
+- Added a boatload of transition email actions [nguyen]
+
+
+0.2 (2011-11-28)
+----------------
+
+- Added dependency for Products.ATVocabularyManager [hrenj]
+
+
+0.1 (2011-11-28)
+----------------
+
+- Created recipe with ZopeSkel
+  [hrenj]

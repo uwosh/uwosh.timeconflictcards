@@ -1,0 +1,44 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IBeforeTransitionEvent"
+      handler=".wfsubscribers.preAcceptProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.postRejectProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.postSubmitProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.postAcceptProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IBeforeTransitionEvent"
+      handler=".wfsubscribers.preRejectProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IBeforeTransitionEvent"
+      handler=".wfsubscribers.preSubmitProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.postResubmitProject"
+  />
+  <subscriber
+      for=".content.interfaces.IProject
+           Products.DCWorkflow.interfaces.IBeforeTransitionEvent"
+      handler=".wfsubscribers.preResubmitProject"
+  />
+  <!-- ##code-section SUBSCRIBERS #fill in your manual code here -->
+  <!-- ##/code-section SUBSCRIBERS -->
+</configure>
